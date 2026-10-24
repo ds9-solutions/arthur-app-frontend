@@ -3,10 +3,13 @@ class AuthUserEntity {
   final String? email;
   final String? displayName;
 
-  const AuthUserEntity({required this.id, this.email, this.displayName});
+  /// Controla a faixa "Confirme seu e-mail" na Home (RN11, RN19).
+  final bool emailVerified;
 
-  // Descomente ao reativar o Firebase Auth em services/auth_service.dart:
-  // factory AuthUserEntity.fromFirebaseUser(firebase_auth.User user) {
-  //   return AuthUserEntity(id: user.uid, email: user.email, displayName: user.displayName);
-  // }
+  const AuthUserEntity({
+    required this.id,
+    this.email,
+    this.displayName,
+    this.emailVerified = false,
+  });
 }
