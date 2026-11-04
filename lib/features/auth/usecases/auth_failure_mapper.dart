@@ -2,10 +2,17 @@ import 'package:arthur/features/auth/constants/auth_constants.dart';
 import 'package:arthur/features/auth/services/auth_service.dart';
 import 'package:arthur/features/auth/services/consent_service.dart';
 import 'package:arthur/shared/errors/failures.dart';
+import 'package:arthur/shared/logs/log.dart' as app_log;
 
 /// Converte erros do Firebase Auth nas falhas exibidas na UI
 /// (tabela "Mapa de erros" da especificação B5).
 Failure mapAuthFailure(AuthServiceException error) {
+  // O código do Firebase não aparece na UI; o log ajuda a diagnosticar.
+  app_log.Log.print<app_log.Warning>(
+    message: 'Firebase Auth: ${error.code} - ${error.message ?? 'sem mensagem'}',
+    origin: 'AuthFailureMapper',
+    method: 'mapAuthFailure',
+  );
   switch (error.code) {
     case AuthErrorCodes.invalidCredential:
     case AuthErrorCodes.userNotFound:

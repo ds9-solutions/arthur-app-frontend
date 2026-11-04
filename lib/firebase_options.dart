@@ -63,13 +63,14 @@ class DefaultFirebaseOptions {
     projectId: 'arthur-app-dev',
     storageBucket: 'arthur-app-dev.firebasestorage.app',
   );
-
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyA8iuJxEtCYgQuezJCoRwAJF1_0Wk9Ok9E',
     appId: '1:282738460549:ios:3c15b5a8eea3d1398766ec',
     messagingSenderId: '282738460549',
     projectId: 'arthur-app-dev',
     storageBucket: 'arthur-app-dev.firebasestorage.app',
+    androidClientId: '282738460549-d7j9929mu72ef989nkfhcr5umn28ub87.apps.googleusercontent.com',
+    iosClientId: '282738460549-b7cocoe6oaiakudj6cqen1ao5k35v927.apps.googleusercontent.com',
     iosBundleId: 'com.example.arthur',
   );
 }
