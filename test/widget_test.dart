@@ -2,6 +2,7 @@
 // ConsentService falsos, sem tocar o Firebase, e cobrem login, criação de
 // conta, login com Google, Concluir cadastro e logout.
 
+import 'package:arthur/features/auth/services/consent_service.dart';
 import 'package:arthur/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -216,6 +217,19 @@ void main() {
 
     expect(find.text('Não foi possível carregar sua conta'), findsOneWidget);
     await tap(tester, find.text('Tentar de novo'));
+    expect(find.text('Logado com sucesso'), findsOneWidget);
+  });
+
+  testWidgets('com o aceite desligado, conta Google nova vai direto à Home', (tester) async {
+    tester.view.physicalSize = const Size(800, 2000);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(MyApp(authService: auth, consentService: const DisabledConsentService()));
+    await tester.pumpAndSettle();
+
+    await tap(tester, find.text('Continuar com Google'));
+
+    expect(find.text('Concluir cadastro'), findsNothing);
     expect(find.text('Logado com sucesso'), findsOneWidget);
   });
 }
