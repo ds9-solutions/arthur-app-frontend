@@ -18,6 +18,11 @@ class AuthConstants {
 
   /// Papel do dono da conta nesta fase.
   static const String guardianRole = 'guardian';
+
+  /// TEMPORÁRIO: com `false`, o app não lê nem grava o aceite no Firestore
+  /// e não mostra a tela Concluir cadastro. Voltar para `true` quando o
+  /// Firestore e os Termos/Política estiverem prontos (C1-6).
+  static const bool consentEnabled = false;
 }
 
 /// Códigos de `FirebaseAuthException` tratados pelo app.

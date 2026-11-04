@@ -41,7 +41,14 @@ Failure mapAuthFailure(AuthServiceException error) {
 
 /// Erros do Firestore ao ler ou gravar o aceite.
 Failure mapConsentFailure(ConsentServiceException error) {
-  if (error.code == 'unavailable') return const ConnectivityFailure(connectivityMessage);
+  app_log.Log.print<app_log.Warning>(
+    message: 'Firestore (aceite): ${error.code} - ${error.message ?? 'sem mensagem'}',
+    origin: 'AuthFailureMapper',
+    method: 'mapConsentFailure',
+  );
+  if (error.code == 'unavailable' || error.code == 'deadline-exceeded') {
+    return const ConnectivityFailure(connectivityMessage);
+  }
   return const LoadDataFailure('Não foi possível carregar sua conta. Tente de novo');
 }
 

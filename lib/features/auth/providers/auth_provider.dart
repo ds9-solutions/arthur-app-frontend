@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:arthur/features/auth/constants/auth_constants.dart';
 import 'package:arthur/features/auth/models/entities/auth_user_entity.dart';
 import 'package:arthur/features/auth/models/params/complete_sign_up_params.dart';
 import 'package:arthur/features/auth/models/params/login_params.dart';
@@ -65,7 +66,11 @@ class AuthProvider extends ChangeNotifier {
   /// Usa o Firebase por padrão; os testes passam fakes.
   AuthProvider({AuthService? authService, ConsentService? consentService}) {
     final auth = authService ?? FirebaseAuthService();
-    final consent = consentService ?? FirestoreConsentService();
+    final consent =
+        consentService ??
+        (AuthConstants.consentEnabled
+            ? FirestoreConsentService()
+            : const DisabledConsentService());
     _authService = auth;
     _loginUsecase = LoginUsecase(authService: auth);
     _logoutUsecase = LogoutUsecase(authService: auth);
