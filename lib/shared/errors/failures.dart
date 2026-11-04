@@ -1,5 +1,7 @@
 /// Deve ser usada apenas dentro da camada de providers/usecases.
 /// Cada feature pode estender [Failure] com falhas mais específicas.
+///
+/// Como a classe é `sealed`, toda subclasse precisa ficar neste arquivo.
 sealed class Failure {
   final String message;
   const Failure(this.message);
@@ -41,4 +43,26 @@ class AuthFailure extends Failure {
 
 class InvalidCredentialsFailure extends Failure {
   const InvalidCredentialsFailure([super.message = 'Credenciais inválidas']);
+}
+
+class UserDisabledFailure extends Failure {
+  const UserDisabledFailure([super.message = 'Esta conta está desativada. Fale com o suporte']);
+}
+
+class EmailAlreadyInUseFailure extends Failure {
+  const EmailAlreadyInUseFailure([super.message = 'Este e-mail já tem conta']);
+}
+
+class InvalidEmailFailure extends Failure {
+  const InvalidEmailFailure([super.message = 'E-mail inválido']);
+}
+
+class WeakPasswordFailure extends Failure {
+  const WeakPasswordFailure([
+    super.message = 'Senha fraca. Use ao menos 8 caracteres, com letras e números',
+  ]);
+}
+
+class TooManyRequestsFailure extends Failure {
+  const TooManyRequestsFailure([super.message = 'Muitas tentativas. Aguarde alguns minutos']);
 }

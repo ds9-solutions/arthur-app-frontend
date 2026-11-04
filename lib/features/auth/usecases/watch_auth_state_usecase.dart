@@ -4,7 +4,9 @@ import 'package:arthur/features/auth/services/auth_service.dart';
 class WatchAuthStateUsecase {
   final AuthService _authService;
 
-  WatchAuthStateUsecase({AuthService? authService}) : _authService = authService ?? AuthService();
+  WatchAuthStateUsecase({required AuthService authService}) : _authService = authService;
 
-  Stream<AuthUserEntity?> call() => _authService.authStateChanges;
+  /// `userChanges` (e não `authStateChanges`) para refletir nome e
+  /// verificação de e-mail sem novo login.
+  Stream<AuthUserEntity?> call() => _authService.userChanges;
 }

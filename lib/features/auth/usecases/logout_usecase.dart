@@ -5,7 +5,7 @@ import 'package:fpdart/fpdart.dart';
 class LogoutUsecase {
   final AuthService _authService;
 
-  LogoutUsecase({AuthService? authService}) : _authService = authService ?? AuthService();
+  LogoutUsecase({required AuthService authService}) : _authService = authService;
 
   TaskEither<Failure, Unit> call() {
     return _authService.signOut().mapLeft(

@@ -44,6 +44,8 @@ dependencies:
   # Autenticação
   firebase_core: ^3.8.0
   firebase_auth: ^5.3.3
+  # Banco de dados (registro do aceite dos Termos e da Política)
+  cloud_firestore: ^5.6.12
   # Renderização de SVG (logo da marca)
   flutter_svg: ^2.0.10
 
